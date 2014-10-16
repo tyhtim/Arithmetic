@@ -7,7 +7,7 @@
 
 #include<stdio.h>
 
-void quicksort(int a[],int numsize)/*a是整形数组，numsize是元素个数*/
+int * quicksort(int a[],int numsize)/*a是整形数组，numsize是元素个数*/
 {
 	int i=0,j=numsize-1;
 	int val=a[0];/*指定参考值val大小*/
@@ -33,14 +33,21 @@ void quicksort(int a[],int numsize)/*a是整形数组，numsize是元素个数*/
 				}
 		}
 		a[i]=val;/*将保存在val中的数放到a[i]中*/
-		QuickSort(a,i);/*递归，对前i个数排序*/
-		QuickSort(a+i+1,numsize-i-1);/*对i+1到numsize-1这numsize-1-i个数排序*/
+		quicksort(a,i);/*递归，对前i个数排序*/
+		quicksort(a+i+1,numsize-i-1);/*对i+1到numsize-1这numsize-1-i个数排序*/
 	}
+	return &a[0];
 }
 int main()
 {
-	void quicksort(int a[],int numsize);
+	int* quicksort(int a[],int numsize);
+	int *p;
 	int a[10]={6,1,3,2,4,5,19,9,10,8};
-	quicksort(a,10);
+	for(int i=0;i<10;i++)
+		printf("%4d",a[i]);
+	printf("\n");
+	p=quicksort(a,10);
+	for (int i=0;i<10;i++)
+		printf("%4d",*(p+i));
 	return 0;
 }
