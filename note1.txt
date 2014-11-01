@@ -1,0 +1,20 @@
+public class stringbuilder {
+	public static void main(String[] args){
+		// TODO Auto-generated method stub
+		StringBuilder str1=new StringBuilder("hello");
+		StringBuilder str2=new StringBuilder("world");
+		change(str1,str2);
+		System.out.println(str1+""+str2+"");
+	}
+		
+	private static void change(StringBuilder str1, StringBuilder str2) {
+		str1.append(str2);
+		str1=str2;
+	}
+}
+输出结果是：helloworldworld
+分析：根据参数传递的方式有两种
+     第一种是基本数据类型的传递，这种类型是值拷贝，它并不会改变原先值。
+     第二种是对象的传递，传递的是对象的引用，也就是对象的地址
+  例如上面代码中当程序执行了StringBuilder str1 = new StringBuilder("hello")后，程序在栈内存中开辟了一块地址编号为AD9500内存空间，用于存放str1的引用地址里边放的值是堆内存中的一个地址，示例中的值为BE2500，可以理解为有一个指针指向了堆内存中的编号为BE2500的地址。堆内存中编号为BE2500的这个        地址中存放的才是str1的值;"hello"
+	   当程序进入change方法后，将str1的值，也就是对象的引用BE2500传了进来。这时，程序在栈内存中又开辟了一块编号为AD9600的内存空间，里边放的值是传递过来的值，即AD9600。可以理解为栈内存中的编号为AD9600的内存中有一个指针，也指向了堆内存中编号为BE2500的内存地址
